@@ -1,14 +1,30 @@
 package edu.escuelaing.arep.app;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class HttpServer {
+
+    /**
+     * Método principal, inicia un socket
+     * recibe la petición get y agrega el nombre a de la
+     * película seleccionada a la URL de la API
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
+        JSONArray JSON = null;
         String urlToUse1 = "http://www.omdbapi.com/?t=";
         String urlToUse2 = "&apikey=18afbfbc";
         String urlFinal = null;
-        URL urlToUse = null;
-        StringBuffer response = null;
+        String response = "[";
+        String table;
+        String name = null;
 
         ServerSocket serverSocket = null;
         try {
@@ -19,6 +35,7 @@ public class HttpServer {
         }
         boolean running = true;
         while(running) {
+            response = "[";
             Socket clientSocket = null;
             try {
                 System.out.println("Listo para recibir ...");
@@ -27,46 +44,40 @@ public class HttpServer {
                 System.err.println("Accept failed.");
                 System.exit(1);
             }
-
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
                             clientSocket.getInputStream()));
             String inputLine, outputLine;
-
             while ((inputLine = in.readLine()) != null) {
                 if(inputLine.startsWith("G") && inputLine.contains("?")){
                     String[] names = inputLine.split(" ");
-                    String name = names[1];
+                    name = names[1];
                     names = name.split("=");
                     name = names[1];
                     urlFinal = urlToUse1 + name + urlToUse2;
-                    urlToUse = new URL(urlFinal);
-
-                    HttpURLConnection con = (HttpURLConnection) urlToUse.openConnection();
-                    con.setRequestMethod("GET");
-                    con.setRequestProperty("User-Agent", "application/json");
-                    BufferedReader consulta = new BufferedReader(new InputStreamReader(
-                            con.getInputStream()));
-                    String inputConsulta;
-                    response = new StringBuffer();
-                    while ((inputConsulta = consulta.readLine()) != null) {
-                        response.append(inputConsulta);
-                    }
-                    consulta.close();
                 }
                 System.out.println("Received: " + inputLine);
                 if (!in.ready()) {
                     break;
                 }
             }
-            outputLine = "HTTP/1.1 200 \r\n" +
-                    "Content-Type: text/html \r\n" +
-                    "\r\n" +
-                    htmlWithForms(response);
+            if(urlFinal != null){
+//                response += HttpConnectionExample.answer(urlFinal);
+                response += Cache.cache(urlFinal, name);
+                response += "]";
+                table = table(response);
 
+                outputLine = "HTTP/1.1 200 \r\n" +
+                        "Content-Type: text/html \r\n" +
+                        "\r\n" +
+                        "<table border=\" 1\"\n" + table;
+            }else{
+                outputLine = "HTTP/1.1 200 \r\n" +
+                        "Content-Type: text/html \r\n" +
+                        "\r\n" + htmlWithForms();
+            }
             out.println(outputLine);
-
             out.close();
             in.close();
             clientSocket.close();
@@ -74,8 +85,35 @@ public class HttpServer {
         serverSocket.close();
     }
 
+    /**
+     * Método que genera una tabla que contiene la información
+     * de la película, ordenada alfabéticamente
+     * @param jsonA json que contiene la información de la película
+     * @return
+     */
+    private static String table(String jsonA){
+        ArrayList<String> keys = new ArrayList<String>();
+        String table = "<tr> \n";
+        String value = null;
+        JSONArray json = new JSONArray(jsonA);
+        JSONObject obj = json.getJSONObject(0);
+        for(String key : obj.keySet()){
+            keys.add(key);
+        }
+        Collections.sort(keys);
+        for(String key : keys){
+            value = obj.get(key).toString();
+            table += "<td>" + key + "</td>\n";
+            table += "<td>" + value + "</td>\n";
+            table += "<tr> \n";
+        }
+        return table;
+    }
 
-
+    /**
+     * Método que genera una pagina html simple
+     * @return String con el código del html
+     */
     public static String htmlSimple(){
         return "<!DOCTYPE html>"
                 + "<html>"
@@ -89,7 +127,11 @@ public class HttpServer {
                 + "</html>";
     }
 
-    public static String htmlWithForms(StringBuffer response){
+    /**
+     * Método que genera una pagina con posibilidad de introducir texto
+     * @return String con el código del html
+     */
+    public static String htmlWithForms(){
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "    <head>\n" +
@@ -104,7 +146,7 @@ public class HttpServer {
                 "            <input type=\"text\" id=\"name\" name=\"name\"><br><br>\n" +
                 "            <input type=\"button\" value=\"Submit\" onclick=\"loadGetMsg()\">\n" +
                 "        </form> \n" +
-                "        <div id=\"getrespmsg\"></div>\n" + response +
+                "        <div id=\"getrespmsg\"></div>\n" +
                 "\n" +
                 "        <script>\n" +
                 "            function loadGetMsg() {\n" +

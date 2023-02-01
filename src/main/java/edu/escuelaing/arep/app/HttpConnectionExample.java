@@ -9,37 +9,35 @@ import java.net.URL;
 
 public class HttpConnectionExample {
 
-    private static final String USER_AGENT = "application/json";
+    private static final String USER_AGENT = "Mozilla/5.0";
     private static final String GET_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=18afbfbc";
 
-    public static void main(String[] args) throws IOException {
-
-        URL obj = new URL(GET_URL);
+    /**
+     * Método que permite hacer peticiones get a la API
+     * @param urlToUse Url con el nombre de la película a consultar
+     * @return String que contiene la respuesta por parte de la API
+     * @throws IOException
+     */
+    public static String answer(String urlToUse) throws IOException {
+        StringBuffer response = null;
+        URL obj = new URL(urlToUse);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);
-
         //The following invocation perform the connection implicitly before getting the code
         int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
-
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            response = new StringBuffer();
 
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
             in.close();
-
-            // print result
-            System.out.println(response.toString());
-        } else {
-            System.out.println("GET request not worked");
         }
-        System.out.println("GET DONE");
+        return response.toString();
     }
 
 }
