@@ -2,9 +2,10 @@ package edu.escuelaing.arep.app;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Cache {
-    private static HashMap<String, String> cache = new HashMap<>();
+    private static ConcurrentHashMap<String, String> cache = new ConcurrentHashMap<>();
 
     /**
      * Método que almacena una consulta a la API en caso
@@ -25,5 +26,20 @@ public class Cache {
         }
 //        System.out.println(cache.keySet());
         return valor;
+    }
+
+    /**
+     * Método que retorna el tamaño del cache
+     * @return entero que representa el tamaño del cache
+     */
+    public static int getNumKeys(){
+        return cache.size();
+    }
+
+    /**
+     * Elimina los datos del cache
+     */
+    public static void clean() {
+        cache.clear();
     }
 }
