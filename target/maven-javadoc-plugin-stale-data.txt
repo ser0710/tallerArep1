@@ -1,0 +1,49 @@
+@options
+@packages
+@argfile
+-classpath
+'C:/Users/usuario/.m2/repository/org/json/json/20220924/json-20220924.jar'
+-encoding
+'Cp1252'
+-protected
+-source
+'17'
+-sourcepath
+'D:/UNIVERSIDAD/9 SEMESTRE/AREP/taller_1/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/UNIVERSIDAD/9 SEMESTRE/AREP/taller_1/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'taller_1 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'taller_1 1.0-SNAPSHOT API'
+edu.escuelaing.arep.app
+'D:/UNIVERSIDAD/9 SEMESTRE/AREP/taller_1/src/main/java/edu/escuelaing/arep/app/Cache.java'
+'D:/UNIVERSIDAD/9 SEMESTRE/AREP/taller_1/src/main/java/edu/escuelaing/arep/app/HttpConnectionExample.java'
+'D:/UNIVERSIDAD/9 SEMESTRE/AREP/taller_1/src/main/java/edu/escuelaing/arep/app/HttpServer.java'
+C:\Users\usuario\.m2\repository\org\json\json\20220924\json-20220924.jar = 1675204129545
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\src\main\java = 1675030930832
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\allclasses-index.html = 1675305807397
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\allpackages-index.html = 1675305807400
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\element-list = 1675305807278
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\help-doc.html = 1675305807458
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\index-all.html = 1675305807448
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\index.html = 1675305807451
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\jquery-ui.overrides.css = 1675305807540
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\member-search-index.js = 1675305807407
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\module-search-index.js = 1675305807402
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\overview-tree.html = 1675305807356
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\package-search-index.js = 1675305807404
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\script.js = 1675305807484
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\search.js = 1675305807488
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\stylesheet.css = 1675305807473
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\tag-search-index.js = 1675305807408
+D:\UNIVERSIDAD\9 SEMESTRE\AREP\taller_1\target\site\apidocs\type-search-index.js = 1675305807405

@@ -1,4 +1,3 @@
 edu\escuelaing\arep\app\Cache.class
 edu\escuelaing\arep\app\HttpServer.class
-edu\escuelaing\arep\app\Main.class
 edu\escuelaing\arep\app\HttpConnectionExample.class

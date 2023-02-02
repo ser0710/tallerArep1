@@ -10,7 +10,9 @@ evitar llamados constantes a la API
 ### Prerequisites
 
 Git: permite el control de versiones del proyecto
+
 Java: lenguaje en el cual esta desarrollado la totalidad del proyecto
+
 Maven: Software que gestiona proyectos java 
 
 
@@ -22,13 +24,18 @@ Clonamos el repositorio
 git clone https://github.com/ser0710/tallerArep1.git
 ```
 
-
+Entramos en la carpeta donde se encuentra el pom.xml
+y ejecutamos
 
 ```
-until finished
+mvn clean package exec:java -D"exec.mainClass"="edu.escuelaing.arep.app.HttpServer"
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Una vez veamos el mensaje de "Listo para recbir ..."
+entramos al buscador de preferencia y entramos al link
+http://localhost:35000 alli podremos ingresar
+el nombre de una película
+
 
 ## Running the tests
 
@@ -69,5 +76,14 @@ version 1.0
 Sergio Andres Rozo Pulido
 
 
-## Description
+## Extra description
 
+* Extensibilidad: Principalmente se podría tener criterios 
+extras en la búsqueda de la película, para ello basta 
+con cambiar el link ya sea agregando o quitan lo que sea 
+necesario, en caso dado de querer agregar cosas al 
+html basta con cambiar el string.
+* Patrones: Principalmente el patrón fachada, 
+gracias al cache que recibe toda la información 
+que se solicita y este analiza si ya cuenta con 
+dicha información o si es necesario consultar a la API
